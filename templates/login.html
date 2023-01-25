@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% block content%}
+
+<br>
+<br>
+
+
+
+  <!-- <div class="fixed-header">
+    <div class="container">
+        <nav>
+            <a href="#home">College Administro</a>
+            <a href="#loginbox">Login</a>
+            <a href="#signinbox">Register</a>
+        </nav>
+    </div> -->
+
+
+<!-- </div> -->
+<style>body
+  {
+      margin: 0;
+      padding: 0;
+      background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url("{{url_for('static', filename='cx-insight-YloghyfD7e8-unsplash.jpg')}}");
+      background-size: cover;
+      background-position: center;
+      font-family: sans-serif;
+  }
+  .loginbox, .signupbox
+  {
+      width: 310px;
+      height: 420px;
+      font-family: sans-serif;
+      background: linear-gradient(#F4D03F,#add8e6);
+      color: #fff;
+      top:50%;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%,-50%);
+      box-sizing: border-box;
+      box-shadow: 0 0 40px 20px rgba(224,255,255,0.26);
+      padding: 70px 30px;
+      backface-visibility: hidden;
+      margin-top: 40px;
+  }
+  .signupbox
+  {
+      transform: rotateY(180deg);
+  }
+  .user
+  {
+      width: 100px;
+      height:100 px;
+      border-radius: 50%;
+      position: absolute;
+      top:-50px;
+      left: calc(50% - 50px);
+  }
+  h1
+  {
+      margin: 0;
+      padding: 0 0 20px;
+      text-align: center;
+      font-size: 22px;
+      color: #0000ff;
+      border-color:antiquewhite;
+  }
+  .loginbox label
+  {
+      margin:0;
+      padding: 0;
+      font-weight: 550;
+      color:#0000ff;
+      font-size: 17px;
+  }
+  .loginbox input
+  {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+  .input-box
+  {
+      border: none;
+      border-bottom: 1px solid #fff;
+      background: transparent;
+      outline: none;
+      height: 40px;
+      color:#0000ff ;
+      font-size: 16px;
+  }
+  .loginbox button
+  {
+      border: none;
+      outline: none;
+      height: 40px;
+      background:#1e90ff;
+      color:#0000ff;
+      font-weight:bold;
+      font-size: 18px;
+      padding: 0px 20px 0px 20px;
+      margin: 0px 0px 20px 0px;
+      border-radius: 20px;
+      width: 100%;
+  }
+  .loginbox button:hover
+  {
+      cursor: pointer;
+      background:#00ff7e;
+      color:#0000ff;
+  }
+  .loginbox a
+  {
+      text-decoration: none;
+      font-size: 12px;
+      line-height: 20px;
+     font-style: italic;
+      color:#0000ff ;
+  }
+  .loginbox a:hover{
+      color: #000080;
+  }
+  /* .fixed-header{
+      width: 100%;
+      position: fixed;        
+      background: #2874A6;
+      padding: 10px 0;
+      color: #fff;
+  }
+  .fixed-header{
+      top: 0;
+  }
+  .container{
+      width: 80%;
+      margin: 0 auto; /* Center the DIV horizontally */
+  /* }
+  nav a{
+      color: #fff;
+      text-decoration: none;
+      padding: 7px 25px;
+      display: inline-block;
+  } */ </style>
+  
+<!-- <link rel="stylesheet" href="login.css"> -->
+    <div class="loginbox">
+      <img src="{{url_for('static', filename='login.jpg')}}" class="user">
+      <h1>LOGIN</h1>
+    <form action = "{{url_for('login')}}" method = "POST">
+  <label for="exampleInputEmail1">Email</label>
+  <input type="email"  name ="email" class="input-box" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+  <label for="exampleInputPassword1">Password</label>
+  <input type="password"  name ="pass" class="input-box" id="exampleInputPassword1" placeholder="Enter Password" required>
+<button class="btn btn-primary" type="submit">Login</button>
+<a href="a">Forget password</a><br>
+<a href="a">I'm new here</a>
+</form>
+</div>
+<div class="signupbox"></div>
+<!-- <div class="card text-left" style="width: 35rem;">
+  <div class="card-body">
+
+    <form action = "{{url_for('login')}}" method = "POST">
+<div class="form-group">
+  <label for="exampleInputEmail1">Email address</label>
+  <input type="email"  name ="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+</div>
+<div class="form-group">
+  <label for="exampleInputPassword1">Password</label>
+  <input type="password"  name ="pass" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+</div>
+<button type="submit" class="btn btn-primary">Login</button>
+</form>
+
+  </div>
+</div> -->
+<!-- </center></body> -->
+
+
+
+
+{% endblock %}

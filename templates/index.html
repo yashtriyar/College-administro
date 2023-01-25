@@ -1,0 +1,355 @@
+{% extends "base.html" %} {% block content %}
+
+
+<style>body
+  {
+      margin: 0;
+      padding: 0;
+      background:linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)),url("{{url_for('static', filename='cx-insight-YloghyfD7e8-unsplash.jpg')}}");
+      background-size: cover;
+      background-position: center;
+      font-family: sans-serif;
+  }
+  .loginbox, .signupbox
+  {
+      width: 310px;
+      height: 420px;
+      font-family: sans-serif;
+      background: linear-gradient(#F4D03F,#add8e6);
+      color: #fff;
+      top:50%;
+      left: 50%;
+      position: absolute;
+      transform: translate(-50%,-50%);
+      box-sizing: border-box;
+      box-shadow: 0 0 40px 20px rgba(224,255,255,0.26);
+      padding: 70px 30px;
+      backface-visibility: hidden;
+      margin-top: 40px;
+  }
+  .signupbox
+  {
+      transform: rotateY(180deg);
+  }
+  .user
+  {
+      width: 100px;
+      height:100 px;
+      border-radius: 50%;
+      position: absolute;
+      top:-50px;
+      left: calc(50% - 50px);
+  }
+  h1
+  {
+      margin: 0;
+      padding: 0 0 20px;
+      text-align: center;
+      font-size: 22px;
+      color: #0000ff;
+      border-color:antiquewhite;
+  }
+  .loginbox label
+  {
+      margin:0;
+      padding: 0;
+      font-weight: 550;
+      color:#0000ff;
+      font-size: 17px;
+  }
+  .loginbox input
+  {
+      width: 100%;
+      margin-bottom: 20px;
+  }
+  .input-box
+  {
+      border: none;
+      border-bottom: 1px solid #fff;
+      background: transparent;
+      outline: none;
+      height: 40px;
+      color:#0000ff ;
+      font-size: 16px;
+  }
+  .loginbox button
+  {
+      border: none;
+      outline: none;
+      height: 40px;
+      background:#1e90ff;
+      color:#0000ff;
+      font-weight:bold;
+      font-size: 18px;
+      padding: 0px 20px 0px 20px;
+      margin: 0px 0px 20px 0px;
+      border-radius: 20px;
+      width: 100%;
+  }
+  .loginbox button:hover
+  {
+      cursor: pointer;
+      background:#00ff7e;
+      color:#0000ff;
+  }
+  .loginbox a
+  {
+      text-decoration: none;
+      font-size: 12px;
+      line-height: 20px;
+     font-style: italic;
+      color:#0000ff ;
+  }
+  .loginbox a:hover{
+      color: #000080;
+  }
+  /* .fixed-header{
+      width: 100%;
+      position: fixed;        
+      background: #2874A6;
+      padding: 10px 0;
+      color: #fff;
+  }
+  .fixed-header{
+      top: 0;
+  }
+  .container{
+      width: 80%;
+      margin: 0 auto; /* Center the DIV horizontally */
+  /* }
+  nav a{
+      color: #fff;
+      text-decoration: none;
+      padding: 7px 25px;
+      display: inline-block;
+  } */ </style>
+
+<div class="container-fluid">
+  <center>
+    <div class="card text-left mt-3" style="width: 35rem">
+      <div class="card-body">
+        <form class="form-group" action="{{url_for('index')}}" method="POST">
+          <label for="sel"> Select document:</label>
+          <select
+            name="type"
+            class="form-control"
+            id="exampleFormControlSelect1"
+            required
+          >
+            <option value="blood">Documents</option>
+            <option value="donorname">Bonafide Certificate</option>
+            <option value="donorname">Marksheet</option>
+            <option value="donorname">Fee Receipt</option>
+            <option value="donorname">Others</option>
+          </select>
+            <br/>
+            <textarea name="" id="" cols="62" rows="3" placeholder="Description" required></textarea>
+          <!-- <input
+            class="form-control mr-sm-2"
+            type="search"
+            name="search"
+            placeholder="Description"
+            aria-label="Search"
+            required
+          />-->
+          <br/> 
+          <center>
+            <br/> 
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              View
+            </button>
+            <br/>
+            <br/>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+              Download
+            </button>
+          </center>
+        </form>
+      </div>
+    </div>
+  </center>
+</div>
+<div class="container-fluid mb-2 mt-2">
+  {% if search!=NULL %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">
+        Search results:
+      </li>
+    </ol>
+  </nav>
+
+  <center>
+    {% for s in search %}
+    <div class="card text-left" style="width: 70rem">
+      <div class="card-header">{{s["name"]}}</div>
+      <div class="card-body ml-3">
+        <h5 class="card-title ml-3">{{s['email']}}</h5>
+        <h6 class="card-subtitle mb-2 ml-3 text-muted">
+          Blood Group: {{s['bg']}}
+        </h6>
+        <p class="card-text ml-3">
+          Address: {{s["addr"]}} {{ s["city"]}} {{s['pin']}}
+          <br />
+
+          {% if session['username'] == s['email']%}
+
+          <span
+            class="d-inline-block"
+            data-toggle="popover"
+            data-content="Disabled popover"
+          >
+            <button
+              class="btn btn-primary mt-2 content-justify-end"
+              style="pointer-events: none"
+              type="button"
+              disabled
+            >
+              contact for blood
+            </button>
+          </span>
+
+          {% elif session['logged_in'] == True %}
+
+          <button
+            type="button"
+            class="btn btn-primary mt-1 content-justify-end"
+            data-toggle="modal"
+            data-target="#exampleModalCenter"
+          >
+            contact for blood
+          </button>
+        </p>
+
+        {% endif %}
+      </div>
+      <br />
+      {% endfor %} {% endif %}
+    </div>
+  </center>
+</div>
+<div class="container-fluid">
+  <!-- Content here -->
+  <!-- <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">
+        Registered donores:
+      </li>
+    </ol>
+  </nav> -->
+
+  <!-- <center>
+    {% for row in rows %}
+    <div class="card text-left" style="width: 70rem">
+      <div class="card-header">{{row["name"]}}</div>
+      <div class="card-body ml-3">
+        <h5 class="card-title ml-3">{{row['email']}}</h5>
+        <h6 class="card-subtitle mb-2 ml-3 text-muted">
+          Blood Group: {{row['bg']}}
+        </h6>
+        <p class="card-text ml-3">
+          Address: {{row["addr"]}} {{ row["city"]}} {{row['pin']}}
+          <br />
+          {% if session['username'] == row['email']%}
+
+          <span
+            class="d-inline-block"
+            data-toggle="popover"
+            data-content="Disabled popover"
+          >
+            <button
+              class="btn btn-primary mt-2"
+              style="pointer-events: none"
+              type="button"
+              disabled
+            >
+              contact for blood
+            </button>
+          </span>
+
+          {% elif session['logged_in'] == True %}
+          <button
+            type="button"
+            class="btn btn-primary mt-1"
+            onclick="send_notification_clicked('{{row['email']}}');"
+            data-toggle="modal"
+            data-target="#exampleModalCenter"
+            
+          >
+            contact for blood
+          </button>
+        </p>
+
+        <div
+          class="modal fade"
+          id="exampleModalCenter"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalCenterTitle"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">
+                  contact for blood
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <form
+                  id="contactform"
+                  method="POST"
+                  action=""
+                >
+                  <label for="name">Name</label>
+                  <input type="text" name="nm" class="form-control" required />
+                  <label for="addr"> confirm your Address</label>
+                  <textarea name="add" class="form-control" required></textarea>
+
+                  <button
+                    class="btn btn-outline-success my-2 my-sm-0"
+                    type="submit"
+                  >
+                    Submit
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-secondary mt-1"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endif %}
+      </div>
+    </div>
+    <br />
+    {% endfor %}
+  </center> -->
+</div>
+
+{% with messages = get_flashed_messages() %} {%if messages%} {%for mess in
+messages%}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  {{mess}}
+</div>
+
+{%endfor%} {%endif%} {% endwith %} {% endblock %}
+
+
