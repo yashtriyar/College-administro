@@ -162,7 +162,7 @@ def login():
 
         email = request.form['email']
         password = request.form['pass']
-        if email == 'admin@bloodbank.com' and password == 'admin':
+        if email == 'admin@college.com' and password == 'admin':
             a = 'yes'
             session['username'] = email
             #session['logged_in'] = True
